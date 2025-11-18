@@ -14,7 +14,8 @@ function App() {
     return (
         <>
             <AddTaskForm onAddTask={addTask}/>
-            <TasksList tasks={tasks}/>
+            <TasksList tasks={tasks} setTasks={setTasks} isComplete={false}/>
+            <TasksList tasks={tasks} setTasks={setTasks} isComplete={true}/>
         </>
     )
 }

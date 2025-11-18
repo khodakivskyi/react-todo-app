@@ -3,9 +3,10 @@ import {type Task} from '../types/Task.ts'
 
 interface TasksItemProps {
     task: Task;
+    onMarkTaskAsCompleted: (id: string ) => void;
 }
 
-export default function TasksItem({task}: TasksItemProps) {
+export default function TasksItem({task, onMarkTaskAsCompleted}: TasksItemProps) {
     const [timeLeft, setTimeLeft] = useState("");
 
     useEffect(() => {
@@ -46,6 +47,7 @@ export default function TasksItem({task}: TasksItemProps) {
             <h1>{task.title}</h1>
             {task.desc && <p>{task.desc}</p>}
             {task.deadline && <p>Time to end: {timeLeft}</p>}
+            {!task.isComplete && <button onClick={() => onMarkTaskAsCompleted(task.id)}>Mark as completed</button>}
         </div>
     )
 }

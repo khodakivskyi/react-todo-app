@@ -18,6 +18,7 @@ export default function AddTaskForm(props: AddTaskFormProps ) {
             title,
             desc: desc || null,
             deadline: deadline || null,
+            isComplete: false,
         }
 
         props.onAddTask(newTask);
