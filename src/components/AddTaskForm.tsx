@@ -29,20 +29,39 @@ export default function AddTaskForm(props: AddTaskFormProps ) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type='text'
-                   placeholder='Task title'
-                   required value={title}
-                   onChange={(e) => setTitle(e.target.value)}/>
-            <input type='text'
-                   placeholder='Task description'
-                   value={desc}
-                   onChange={(e) => setDesc(e.target.value)}/>
-            <input type="date"
-                placeholder='Task deadline'
-                value={deadline}
-                onChange={(e) => setDeadline(e.target.value)}/>
-            <button type="submit">Add task to do</button>
+        <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-3">
+                <input
+                    type='text'
+                    placeholder='Task title'
+                    required
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    className="input-control"/>
+                <textarea
+                    placeholder='Short description'
+                    value={desc}
+                    onChange={(e) => setDesc(e.target.value)}
+                    className="input-control min-h-[90px] resize-none"/>
+                <input
+                    type="date"
+                    value={deadline}
+                    onChange={(e) => setDeadline(e.target.value)}
+                    className="input-control"/>
+            </div>
+            <div className="flex items-center justify-between">
+                <button type="submit" className="primary-btn">
+                    New task
+                </button>
+                <button
+                    type="button"
+                    className="ghost-btn"
+                    onClick={() => {
+                        setTitle("");
+                        setDesc("");
+                        setDeadline("");
+                    }}>Clear</button>
+            </div>
         </form>
     )
 }

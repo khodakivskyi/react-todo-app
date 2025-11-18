@@ -28,7 +28,7 @@ export default function TasksItem({task, onMarkTaskAsCompleted}: TasksItemProps)
             const minutes = Math.floor((diff / (1000 * 60)) % 60);
             const seconds = Math.floor((diff / 1000) % 60);
 
-            setTimeLeft(`${days}:${hours}:${minutes}:${seconds}`);
+            setTimeLeft(`D:${days} H:${hours} M:${minutes} S:${seconds}`);
         }
 
         updateTimer();
@@ -43,11 +43,23 @@ export default function TasksItem({task, onMarkTaskAsCompleted}: TasksItemProps)
     }, [task.deadline]);
 
     return (
-        <div key={task.id}>
-            <h1>{task.title}</h1>
-            {task.desc && <p>{task.desc}</p>}
-            {task.deadline && <p>Time to end: {timeLeft}</p>}
-            {!task.isComplete && <button onClick={() => onMarkTaskAsCompleted(task.id)}>Mark as completed</button>}
+        <div key={task.id}
+            className={`rounded-2xl border p-4 shadow-card ${task.isComplete ? 'border-white/10 bg-white/5 opacity-60' : 'border-white/5 bg-white/10'}`}>
+            <div className="flex items-start justify-between gap-4">
+                <div className="space-y-1">
+                    <h2 className="text-lg font-medium text-white">{task.title}</h2>
+                    {task.desc && <p className="text-sm text-ink-300">{task.desc}</p>}
+                    {task.deadline && (
+                        <p className="text-xs uppercase tracking-[0.2em] text-ink-400">
+                            {timeLeft || '...'}
+                        </p>
+                    )}
+                </div>
+                {!task.isComplete && (
+                    <button onClick={() => onMarkTaskAsCompleted(task.id)}
+                        className="ghost-btn">Mark as complete</button>
+                )}
+            </div>
         </div>
     )
 }
